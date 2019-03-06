@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact name="KeepNote.war">
+    <output-path>$PROJECT_DIR$/out/artifacts/KeepNote_war</output-path>
+    <root id="root">
+      <element id="archive" name="KeepNote.war" />
+    </root>
+  </artifact>
+</component>

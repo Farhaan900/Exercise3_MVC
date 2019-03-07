@@ -1,15 +1,14 @@
 package com.stackroute.keepnote.controller;
 
 
+import com.stackroute.keepnote.config.BeansConfig;
 import com.stackroute.keepnote.model.Note;
 import com.stackroute.keepnote.repository.NoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +22,7 @@ import java.time.LocalDateTime;
 @Controller
 public class NoteController {
 	@Autowired
-	ApplicationContext applicationContextExt;
+	AnnotationConfigApplicationContext applicationContextExt;
 	Note noteExt;
 	NoteRepository noteRepositoryExt;
 
@@ -48,9 +47,11 @@ public class NoteController {
 	 */
 
 	public NoteController(){
-		applicationContextExt = new ClassPathXmlApplicationContext("beans.xml");
-		noteExt = (Note)applicationContextExt.getBean("note");
-		noteRepositoryExt = (NoteRepository) applicationContextExt.getBean("noteRepository");
+		applicationContextExt = new AnnotationConfigApplicationContext();
+		applicationContextExt.register(BeansConfig.class);
+		applicationContextExt.refresh();
+		noteExt = applicationContextExt.getBean(Note.class);
+		noteRepositoryExt = applicationContextExt.getBean(NoteRepository.class);
 	}
 	
 	/*Define a handler method to read the existing notes by calling the getAllNotes() method 

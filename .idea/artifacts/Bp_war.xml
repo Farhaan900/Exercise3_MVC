@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact name="Bp.war">
+    <output-path>$PROJECT_DIR$/out/artifacts/Bp_war</output-path>
+    <root id="root">
+      <element id="archive" name="Bp.war" />
+    </root>
+  </artifact>
+</component>
